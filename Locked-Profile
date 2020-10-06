@@ -1,0 +1,17 @@
+function lockedProfile() {
+
+    let divsElements = Array.from(document.querySelectorAll(".profile"));
+    divsElements.forEach(div => {
+        div.addEventListener('click', (e) => {
+            if (e.target.innerHTML == 'Show more' && e.currentTarget.querySelector('input[value="lock"]').checked == false) {
+                e.currentTarget.querySelector("div[id*='Hidden']").style.display = 'block';
+                e.target.innerHTML = 'Hide it';
+            } else if (e.target.innerHTML == 'Hide it' && e.currentTarget.querySelector('input[value="lock"]').checked == false) {
+                e.currentTarget.querySelector("div[id*='Hidden']").style.display = 'none';
+                e.target.innerHTML = 'Show more';
+            } else if(e.target.innerHTML == 'Hide it' && e.currentTarget.querySelector('input[value="lock"]').checked == true){
+                e.target.disabled=true;
+            }
+        })
+    })
+}
