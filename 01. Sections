@@ -1,0 +1,15 @@
+function create(words) {
+   let divContent = document.getElementById('content');
+
+   for (let i = 0; i < words.length; i++) {
+      let currentDiv = document.createElement('div');
+      divContent.appendChild(currentDiv);
+      let currentParagraph = document.createElement('p');
+      currentDiv.appendChild(currentParagraph);
+      currentParagraph.style.display = 'none';
+      currentParagraph.innerText = words[i];
+      currentDiv.addEventListener('click', (e) => {
+         currentParagraph.style.display = 'block';
+      })
+   }
+}
