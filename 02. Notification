@@ -1,0 +1,12 @@
+function notify(message) {
+
+    let button = document.getElementsByTagName('button')[0];
+    let div = document.getElementById('notification');
+    div.innerHTML = message;
+    div.style.display = 'block';
+
+    setTimeout(() => {
+        div.style.display = 'none';
+    }, 2000);
+
+}
