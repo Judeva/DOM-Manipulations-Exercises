@@ -1,0 +1,35 @@
+function attachEventsListeners() {
+    let buttons = Array.from(document.querySelectorAll('input[type="button"]'));
+    let inputs = Array.from(document.querySelectorAll('input[type="text"]'));
+    let legend= {
+        daysBtn:0,
+        hoursBtn: 1,
+        minutesBtn:2,
+        secondsBtn:3,
+    }
+    buttons.forEach(d => {
+        d.addEventListener('click', (e) => {
+            
+            let label =e.currentTarget.id; //daysBtn
+            let number = inputs[legend[label]].value; //2
+                        
+            switch (label) {
+                case 'daysBtn':
+                    inputs[0].value = number;
+                    break;
+                case 'hoursBtn':
+                    inputs[0].value =number/ 24;
+                    break;
+                case 'minutesBtn':
+                    inputs[0].value =number/ 1440;
+                    break;
+                case 'secondsBtn':
+                    inputs[0].value =number/ 86400;
+                    break;
+            }
+            inputs[1].value = inputs[0].value * 24;
+            inputs[2].value = inputs[0].value * 1440;
+            inputs[3].value = inputs[0].value * 86400;
+        })
+    })
+}
