@@ -1,0 +1,19 @@
+function solve() {
+   let body = document.getElementsByTagName('tbody')[0];
+   let rows = Array.from(body.children);
+   let searchBtn = document.getElementById('searchBtn');
+   searchBtn.addEventListener('click', search);
+
+   function search() {
+      rows.forEach(row => {
+         row.className = '';
+      })
+      let input = document.getElementById('searchField').value.toUpperCase();
+      rows.forEach(row => {
+         if (((row.innerText).toUpperCase()).includes(input)) {
+            row.className = 'select';
+         }
+         document.getElementById('searchField').value = '';
+      });
+   }
+}
