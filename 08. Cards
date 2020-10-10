@@ -1,0 +1,48 @@
+function solve() {
+   let player1Div = document.getElementById('player1Div');
+   let player2Div = document.getElementById('player2Div');
+   let resultDiv = document.getElementById('result');
+   let historyDiv = document.getElementById('history');
+   let counter = 0;
+
+   player1Div.addEventListener('click', e => {
+      e.target.src = "images/whiteCard.jpg";
+      resultDiv.children[0].innerHTML = e.target.name;
+      counter++;
+      compare();
+
+   });
+   player2Div.addEventListener('click', e => {
+      e.target.src = "images/whiteCard.jpg";
+      resultDiv.children[2].innerHTML = e.target.name;
+      counter++
+      compare();
+
+   });
+
+   function compare() {
+      if (counter == 2) {
+         let player1cards = Array.from(player1Div.getElementsByTagName('img'));
+         let player2cards = Array.from(player2Div.getElementsByTagName('img'));
+         historyDiv.innerHTML += `[${resultDiv.children[0].innerHTML} vs ${resultDiv.children[2].innerHTML}] `;
+         if (Number(resultDiv.children[0].innerHTML) > Number(resultDiv.children[2].innerHTML)) {
+
+            let winnerCard = player1cards.filter(c => c.name == resultDiv.children[0].innerHTML)[0];
+            let loserCard = player2cards.filter(c => c.name == resultDiv.children[2].innerHTML)[0];
+            resultDiv.children[0].innerHTML='';
+            resultDiv.children[2].innerHTML='';
+            winnerCard.style.border = '2px solid green';
+            loserCard.style.border = '2px solid red';
+            counter = 0;
+         } else {
+            let loserCard = player1cards.filter(c => c.name == resultDiv.children[0].innerHTML)[0];
+            let winnerCard = player2cards.filter(c => c.name == resultDiv.children[2].innerHTML)[0];
+            resultDiv.children[0].innerHTML='';
+            resultDiv.children[2].innerHTML='';
+            winnerCard.style.border = '2px solid green';
+            loserCard.style.border = '2px solid red';
+            counter = 0;
+         }
+      }
+   }
+}
