@@ -1,0 +1,71 @@
+function solve() {
+
+  let buttonGnrt = document.getElementsByTagName('button')[0];
+  let buttonBuy = document.getElementsByTagName('button')[1];
+  let tbody = document.getElementsByTagName('tbody')[0];
+  let textarea2 = document.getElementsByTagName('textarea')[1];
+
+  buttonGnrt.addEventListener('click', addFurniture);
+  buttonBuy.addEventListener('click', buyFurniture);
+
+  function buyFurniture() {
+
+    const bougthgItems = [...document.querySelectorAll('input')].filter(i=>i.checked)
+      .map(i=>i.parentNode.parentNode)
+      .map(row=>({
+        name: row.children[1].textContent,
+        price: Number(row.children[2].textContent),
+        decFactor:Number(row.children[3].textContent),
+      }));
+ 
+      const result = [
+        `Bought furniture: ${bougthgItems.map(i=>i.name).join(', ')}`,
+        `Total price: ${bougthgItems.reduce((p,c,i,a)=>p+c.price,0).toFixed(2)}`,
+        `Average decoration factor: ${(bougthgItems.reduce((p,c,i,a)=>p+c.decFactor,0)/bougthgItems.length)}`,
+      ]
+      textarea2.value = result.join('\n');
+  }
+
+  function addFurniture() {
+    let furnitures = JSON.parse(document.getElementsByTagName('textarea')[0].value);
+    furnitures.forEach(furniture => {
+      let newRow = document.createElement('tr');
+      let newTdImg = document.createElement('td');
+      let newTdName = document.createElement('td');
+      let newTdPrice = document.createElement('td');
+      let newTdDecor = document.createElement('td');
+      let newTdcheckBox = document.createElement('td');
+
+      let img = document.createElement('img');
+      img.src = furniture.img;
+
+      let name = document.createElement('p');
+      name.innerText = furniture.name;
+
+      let price = document.createElement('p');
+      price.innerText = furniture.price;
+
+      let decoration = document.createElement('p');
+      decoration.innerText = furniture.decFactor;
+      let checkbutton = document.createElement('input');
+      checkbutton.setAttribute("type", "checkbox");
+
+      newTdImg.appendChild(img);
+      newTdName.appendChild(name);
+      newTdPrice.appendChild(price);
+      newTdDecor.appendChild(decoration);
+      newTdcheckBox.appendChild(checkbutton);
+
+      newRow.appendChild(newTdImg);
+      newRow.appendChild(newTdName);
+      newRow.appendChild(newTdPrice);
+      newRow.appendChild(newTdDecor);
+      newRow.appendChild(newTdcheckBox);
+      tbody.appendChild(newRow);
+    });
+
+    
+    document.getElementsByTagName('textarea')[0].value = '';
+  }
+
+}
