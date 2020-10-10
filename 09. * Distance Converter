@@ -1,0 +1,27 @@
+function attachEventsListeners() {
+    let button = document.getElementById('convert');
+    button.addEventListener('click', convert);
+    let outputField =document.getElementById('outputDistance');
+    let conversionRatesFromMeter = {
+
+        km: 1000,
+        m: 1,
+        cm: 0.01,
+        mm: 0.001,
+        mi: 1609.34,
+        yrd: 0.9144,
+        ft: 0.3048,
+        in: 0.0254,
+    }
+
+    function convert() {
+        let input = document.getElementById('inputDistance');
+        let inputUnits = document.getElementById('inputUnits'); //collection
+        let outputUnits = document.getElementById('outputUnits'); //collection
+        let selectedRateValue = inputUnits.value;
+        let valueToConvert = input.value * conversionRatesFromMeter[selectedRateValue]; //1000 m
+        let selectedOutputUnit =outputUnits.value;
+        let result =valueToConvert/conversionRatesFromMeter[selectedOutputUnit];
+        outputField.value=Number(result);
+    }
+}
